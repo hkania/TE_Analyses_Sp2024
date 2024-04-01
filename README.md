@@ -1,5 +1,7 @@
 # TE_Analyses_Sp2024
 
+See the project [wiki]https://github.com/hkania/TE_Analyses_Sp2024/wiki.
+
 Transposable elements (TEs) are selfish genetic units that amplify their own replication within the genome of a host. Some refer to TEs as parasitic due to the nature of their propagation. TEs have been implicated in driving evolutionary patterns from genetic novelty, including placentas in mammals, to reproductive isolation, such as driving incompatibilities between closely related Drosophila species. Much of what is collectively understood about TEs comes from empirical studies in model organisms. However, there is a dearth of knowledge concerning the role of TEs in wild systems, especially as they relate to the process of speciation. I will investigate the putative role(s) of TEs in the speciation process of mouse lemurs, which are thought to have radiated into tens of species in the last 1.5 million years. I will start by identifying TEs within my study genomes. 
 
 De novo modeling pipelines for identifying TEs in genomes include well known RepeatModeler and EDTA. I will use EarlGrey, a newly developed pipeline that takes advantage of RepeatModeler and adds additional steps to return further curated TE sequences. Importantly, a comprehensive benchmarking paper for de novo TE annotation pipelines has not been established. This can make it tricky to decide which software to use when working with new genomes. 
