@@ -1,0 +1,89 @@
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k90 -q3 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 2.33333.
+The minimum coverage of merged contigs is 9.86364.
+Consider increasing the coverage threshold parameter, c, to 9.86364.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2932  52.7%
+Singleton   327  5.88%
+FR          894  16.1%
+RF           19  0.341%
+FF            0
+Different  1392  25%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k90 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+137	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k90 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2932  52.7%
+Singleton   327  5.88%
+FR          894  16.1%
+RF           19  0.341%
+FF            0
+Different  1392  25%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+137	110	41	100	121	181	211	183	368	17933	n=15 s=100
+137	110	41	100	121	181	211	183	368	17933	n=15 s=200
+137	110	41	100	121	181	211	183	368	17933	n=15 s=500
+137	110	41	100	121	181	211	183	368	17933	n=15 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=15 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=15 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=16 s=100
+137	110	41	100	121	181	211	183	368	17933	n=16 s=200
+137	110	41	100	121	181	211	183	368	17933	n=16 s=500
+137	110	41	100	121	181	211	183	368	17933	n=16 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=16 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=16 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=17 s=100
+137	110	41	100	121	181	211	183	368	17933	n=17 s=200
+137	110	41	100	121	181	211	183	368	17933	n=17 s=500
+137	110	41	100	121	181	211	183	368	17933	n=17 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=17 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=17 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=18 s=100
+137	110	41	100	121	181	211	183	368	17933	n=18 s=200
+137	110	41	100	121	181	211	183	368	17933	n=18 s=500
+137	110	41	100	121	181	211	183	368	17933	n=18 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=18 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=18 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=19 s=100
+137	110	41	100	121	181	211	183	368	17933	n=19 s=200
+137	110	41	100	121	181	211	183	368	17933	n=19 s=500
+137	110	41	100	121	181	211	183	368	17933	n=19 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=19 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=19 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=20 s=100
+137	110	41	100	121	181	211	183	368	17933	n=20 s=200
+137	110	41	100	121	181	211	183	368	17933	n=20 s=500
+137	110	41	100	121	181	211	183	368	17933	n=20 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=20 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=20 s=5000
+
+Best scaffold N50 is 181 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+137	110	41	100	121	181	211	183	368	17933	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k90 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0

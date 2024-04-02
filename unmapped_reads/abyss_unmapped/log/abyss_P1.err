@@ -1,0 +1,87 @@
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k90 -q3 -b50G -j2 /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R1.fastq.gz /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R2.fastq.gz
+No small resolveable junctions were found!
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  1369  86.4%
+Singleton    32  2.02%
+FR          160  10.1%
+RF            0
+FF            0
+Different    23  1.45%
+Total      1584
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k90 -o P1-4.path1 P1-4.dot P1-3.dist
+Reading `P1-3.fa'...
+Writing `P1-3.fa.fai'...
+Reading `P1-4.fa'...
+Writing `P1-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+18	0	0	0	0	0	0	0	0	0	P1-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k90 -p0.9 -o P1-5.path -s P1-5.fa -g P1-5.dot - P1-4.dot P1-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  1369  86.4%
+Singleton    32  2.02%
+FR          160  10.1%
+RF            0
+FF            0
+Different    23  1.45%
+Total      1584
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+18	18	8	102	195	228	239	213	253	3711	n=15 s=100
+18	18	8	102	195	228	239	213	253	3711	n=15 s=200
+18	18	8	102	195	228	239	213	253	3711	n=15 s=500
+18	18	8	102	195	228	239	213	253	3711	n=15 s=1000
+18	18	8	102	195	228	239	213	253	3711	n=15 s=2000
+18	18	8	102	195	228	239	213	253	3711	n=15 s=5000
+18	18	8	102	195	228	239	213	253	3711	n=16 s=100
+18	18	8	102	195	228	239	213	253	3711	n=16 s=200
+18	18	8	102	195	228	239	213	253	3711	n=16 s=500
+18	18	8	102	195	228	239	213	253	3711	n=16 s=1000
+18	18	8	102	195	228	239	213	253	3711	n=16 s=2000
+18	18	8	102	195	228	239	213	253	3711	n=16 s=5000
+18	18	8	102	195	228	239	213	253	3711	n=17 s=100
+18	18	8	102	195	228	239	213	253	3711	n=17 s=200
+18	18	8	102	195	228	239	213	253	3711	n=17 s=500
+18	18	8	102	195	228	239	213	253	3711	n=17 s=1000
+18	18	8	102	195	228	239	213	253	3711	n=17 s=2000
+18	18	8	102	195	228	239	213	253	3711	n=17 s=5000
+18	18	8	102	195	228	239	213	253	3711	n=18 s=100
+18	18	8	102	195	228	239	213	253	3711	n=18 s=200
+18	18	8	102	195	228	239	213	253	3711	n=18 s=500
+18	18	8	102	195	228	239	213	253	3711	n=18 s=1000
+18	18	8	102	195	228	239	213	253	3711	n=18 s=2000
+18	18	8	102	195	228	239	213	253	3711	n=18 s=5000
+18	18	8	102	195	228	239	213	253	3711	n=19 s=100
+18	18	8	102	195	228	239	213	253	3711	n=19 s=200
+18	18	8	102	195	228	239	213	253	3711	n=19 s=500
+18	18	8	102	195	228	239	213	253	3711	n=19 s=1000
+18	18	8	102	195	228	239	213	253	3711	n=19 s=2000
+18	18	8	102	195	228	239	213	253	3711	n=19 s=5000
+18	18	8	102	195	228	239	213	253	3711	n=20 s=100
+18	18	8	102	195	228	239	213	253	3711	n=20 s=200
+18	18	8	102	195	228	239	213	253	3711	n=20 s=500
+18	18	8	102	195	228	239	213	253	3711	n=20 s=1000
+18	18	8	102	195	228	239	213	253	3711	n=20 s=2000
+18	18	8	102	195	228	239	213	253	3711	n=20 s=5000
+
+Best scaffold N50 is 228 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+18	18	8	102	195	228	239	213	253	3711	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k90 -p0.9 -s P1-7.fa -g P1-7.dot -o P1-7.path P1-6.fa P1-6.dot P1-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0

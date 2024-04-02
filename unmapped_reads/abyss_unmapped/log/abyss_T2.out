@@ -1,0 +1,865 @@
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k50-kc2'
+abyss-stack-size 65536 abyss-bloom-dbg -k50 -q3 --kc=2  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k50 -m0 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k50 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k50 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k50 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k50  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k50 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k50  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k50 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k50 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k50 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k50  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k50  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k50 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k50 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k50  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k50 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k50  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k50 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k50 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+547	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+547	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+547	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k50-kc2'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k58-kc2'
+abyss-stack-size 65536 abyss-bloom-dbg -k58 -q3 --kc=2  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k58 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k58 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k58 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k58 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k58  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k58 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k58  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k58 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k58 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k58 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k58  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k58  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k58 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k58 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k58  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k58 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k58  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k58 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k58 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+416	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+416	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+416	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k58-kc2'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k66-kc2'
+abyss-stack-size 65536 abyss-bloom-dbg -k66 -q3 --kc=2  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k66 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k66 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k66 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k66 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k66  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k66 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k66  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k66 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k66 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k66 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k66  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k66  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k66 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k66 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k66  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k66 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k66  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k66 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k66 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+316	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+316	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+316	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k66-kc2'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k74-kc2'
+abyss-stack-size 65536 abyss-bloom-dbg -k74 -q3 --kc=2  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k74 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k74 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k74 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k74 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k74  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k74 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k74  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k74 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k74 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k74 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k74  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k74  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k74 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k74 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k74  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k74 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k74  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k74 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k74 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+246	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+246	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+246	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k74-kc2'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k82-kc2'
+abyss-stack-size 65536 abyss-bloom-dbg -k82 -q3 --kc=2  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k82 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k82 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k82 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k82 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k82  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k82 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k82  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k82 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k82 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k82 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k82  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k82  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k82 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k82 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k82  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k82 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k82  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k82 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k82 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+202	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+202	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+202	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k82-kc2'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k90-kc2'
+abyss-stack-size 65536 abyss-bloom-dbg -k90 -q3 --kc=2  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k90 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k90 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k90 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k90 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k90  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k90 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k90  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k90 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k90 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k90 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k90  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k90  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k90 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k90 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k90  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k90 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k90  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k90 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k90 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+137	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+137	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+137	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k90-kc2'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k50-kc3'
+abyss-stack-size 65536 abyss-bloom-dbg -k50 -q3 --kc=3  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k50 -m0 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k50 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k50 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k50 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k50  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k50 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k50  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k50 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k50 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k50 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k50  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k50  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k50 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k50 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k50  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k50 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k50  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k50 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k50 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+368	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+368	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+368	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k50-kc3'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k58-kc3'
+abyss-stack-size 65536 abyss-bloom-dbg -k58 -q3 --kc=3  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k58 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k58 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k58 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k58 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k58  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k58 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k58  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k58 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k58 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k58 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k58  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k58  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k58 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k58 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k58  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k58 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k58  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k58 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k58 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+275	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+275	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+275	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k58-kc3'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k66-kc3'
+abyss-stack-size 65536 abyss-bloom-dbg -k66 -q3 --kc=3  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k66 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k66 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k66 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k66 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k66  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k66 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k66  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k66 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k66 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k66 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k66  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k66  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k66 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k66 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k66  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k66 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k66  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k66 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k66 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+192	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+192	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+192	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k66-kc3'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k74-kc3'
+abyss-stack-size 65536 abyss-bloom-dbg -k74 -q3 --kc=3  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k74 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k74 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k74 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k74 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k74  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k74 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k74  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k74 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k74 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k74 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k74  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k74  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k74 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k74 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k74  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k74 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k74  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k74 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k74 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+157	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+157	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+157	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k74-kc3'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k82-kc3'
+abyss-stack-size 65536 abyss-bloom-dbg -k82 -q3 --kc=3  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k82 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k82 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k82 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k82 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k82  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k82 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k82  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k82 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k82 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k82 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k82  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k82  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k82 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k82 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k82  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k82 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k82  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k82 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k82 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+118	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+118	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+118	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k82-kc3'
+make: Entering directory '/work/hpk4/abyss_unmapped/test/k90-kc3'
+abyss-stack-size 65536 abyss-bloom-dbg -k90 -q3 --kc=3  -b50G -j2  /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz  > AM10-1.fa
+AdjList    -k90 -m50 --dot AM10-1.fa >AM10-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k90 \
+ -h AM10-1-rr --dot -c AM10-1-rr.fa \
+-g AM10-1-rr.dot AM10-1.fa AM10-1.dot /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k90 -g AM10-2.dot1 AM10-1-rr.dot AM10-1-rr.fa >AM10-1-rr.path
+MergeContigs --dot   -k90 -g AM10-2.dot -o AM10-2.fa AM10-1-rr.fa AM10-2.dot1 AM10-1-rr.path
+PopBubbles  --dot -j2 -k90  -p0.9  -g AM10-3.dot AM10-2.fa AM10-2.dot >AM10-2.path
+MergeContigs   -k90 -o AM10-3.fa AM10-2.fa AM10-2.dot AM10-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	AM10-2.path AM10-1-rr.fa >AM10-indel.fa
+ln -sf AM10-3.fa AM10-unitigs.fa
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-3.fa \
+	|abyss-fixmate   -l40  -h AM10-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k90  -l40 -s1000 -n10  -o AM10-3.dist AM10-3.hist
+Overlap  --dot   -k90 -g AM10-4.dot -o AM10-4.fa AM10-3.fa AM10-3.dot AM10-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k90 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai AM10-3.fa
+abyss-index  --fai AM10-4.fa
+cat AM10-3.fa.fai AM10-4.fa.fai \
+	| MergePaths   -j2 -k90 -s1000  -o AM10-4.path2 - AM10-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k90  AM10-4.dot AM10-4.path2 >AM10-4.path3
+cat AM10-3.fa AM10-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k90  -p0.9  -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+cat AM10-3.fa AM10-4.fa AM10-5.fa | MergeContigs   -k90 -o AM10-6.fa - AM10-5.dot AM10-5.path
+ln -sf AM10-6.fa AM10-contigs.fa
+PathOverlap --overlap   -k90 --dot AM10-5.dot AM10-5.path >AM10-6.dot
+ln -sf AM10-6.dot AM10-contigs.dot
+abyss-map   -j2 -l40    /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz AM10-6.fa \
+	|abyss-fixmate   -l40  -h AM10-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k90  -l40 -s1000 -n10  -o AM10-6.dist.dot AM10-6.hist
+abyss-scaffold    -k90 -s100-5000 -n15-20 -g AM10-6.path.dot  AM10-6.dot AM10-6.dist.dot >AM10-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k90  -p0.9  -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+cat AM10-6.fa AM10-7.fa \
+	| MergeContigs   -k90 -o AM10-8.fa - AM10-7.dot AM10-7.path
+ln -sf AM10-8.fa AM10-scaffolds.fa
+PathOverlap --overlap   -k90 --dot AM10-7.dot AM10-7.path >AM10-8.dot
+ln -sf AM10-8.dot AM10-scaffolds.dot
+abyss-fac   AM10-unitigs.fa AM10-contigs.fa AM10-scaffolds.fa |tee AM10-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+90	0	0	0	0	0	0	0	0	0	AM10-unitigs.fa
+90	0	0	0	0	0	0	0	0	0	AM10-contigs.fa
+90	0	0	0	0	0	0	0	0	0	AM10-scaffolds.fa
+ln -sf AM10-stats.tab AM10-stats
+tr '\t' , <AM10-stats.tab >AM10-stats.csv
+abyss-tabtomd AM10-stats.tab >AM10-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/test/k90-kc3'
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+547	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k50-kc2/AM10-scaffolds.fa
+368	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k50-kc3/AM10-scaffolds.fa
+416	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k58-kc2/AM10-scaffolds.fa
+275	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k58-kc3/AM10-scaffolds.fa
+316	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k66-kc2/AM10-scaffolds.fa
+192	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k66-kc3/AM10-scaffolds.fa
+246	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k74-kc2/AM10-scaffolds.fa
+157	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k74-kc3/AM10-scaffolds.fa
+202	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k82-kc2/AM10-scaffolds.fa
+118	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k82-kc3/AM10-scaffolds.fa
+137	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k90-kc2/AM10-scaffolds.fa
+90	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/test/k90-kc3/AM10-scaffolds.fa

@@ -1,0 +1,1077 @@
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k50-kc2’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k50 -q3 --kc=2 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 2.
+The minimum coverage of merged contigs is 16.7143.
+Consider increasing the coverage threshold parameter, c, to 16.7143.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2290  41.2%
+Singleton   264  4.74%
+FR         1090  19.6%
+RF            3  0.0539%
+FF            0
+Different  1917  34.5%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k50 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+547	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k50 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2290  41.2%
+Singleton   264  4.74%
+FR         1090  19.6%
+RF            3  0.0539%
+FF            0
+Different  1917  34.5%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+547	132	54	100	116	135	159	147	360	18112	n=15 s=100
+547	132	54	100	116	135	159	147	360	18112	n=15 s=200
+547	132	54	100	116	135	159	147	360	18112	n=15 s=500
+547	132	54	100	116	135	159	147	360	18112	n=15 s=1000
+547	132	54	100	116	135	159	147	360	18112	n=15 s=2000
+547	132	54	100	116	135	159	147	360	18112	n=15 s=5000
+547	132	54	100	116	135	159	147	360	18112	n=16 s=100
+547	132	54	100	116	135	159	147	360	18112	n=16 s=200
+547	132	54	100	116	135	159	147	360	18112	n=16 s=500
+547	132	54	100	116	135	159	147	360	18112	n=16 s=1000
+547	132	54	100	116	135	159	147	360	18112	n=16 s=2000
+547	132	54	100	116	135	159	147	360	18112	n=16 s=5000
+547	132	54	100	116	135	159	147	360	18112	n=17 s=100
+547	132	54	100	116	135	159	147	360	18112	n=17 s=200
+547	132	54	100	116	135	159	147	360	18112	n=17 s=500
+547	132	54	100	116	135	159	147	360	18112	n=17 s=1000
+547	132	54	100	116	135	159	147	360	18112	n=17 s=2000
+547	132	54	100	116	135	159	147	360	18112	n=17 s=5000
+547	132	54	100	116	135	159	147	360	18112	n=18 s=100
+547	132	54	100	116	135	159	147	360	18112	n=18 s=200
+547	132	54	100	116	135	159	147	360	18112	n=18 s=500
+547	132	54	100	116	135	159	147	360	18112	n=18 s=1000
+547	132	54	100	116	135	159	147	360	18112	n=18 s=2000
+547	132	54	100	116	135	159	147	360	18112	n=18 s=5000
+547	132	54	100	116	135	159	147	360	18112	n=19 s=100
+547	132	54	100	116	135	159	147	360	18112	n=19 s=200
+547	132	54	100	116	135	159	147	360	18112	n=19 s=500
+547	132	54	100	116	135	159	147	360	18112	n=19 s=1000
+547	132	54	100	116	135	159	147	360	18112	n=19 s=2000
+547	132	54	100	116	135	159	147	360	18112	n=19 s=5000
+547	132	54	100	116	135	159	147	360	18112	n=20 s=100
+547	132	54	100	116	135	159	147	360	18112	n=20 s=200
+547	132	54	100	116	135	159	147	360	18112	n=20 s=500
+547	132	54	100	116	135	159	147	360	18112	n=20 s=1000
+547	132	54	100	116	135	159	147	360	18112	n=20 s=2000
+547	132	54	100	116	135	159	147	360	18112	n=20 s=5000
+
+Best scaffold N50 is 135 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+547	132	54	100	116	135	159	147	360	18112	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k50 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k58-kc2’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k58 -q3 --kc=2 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 2.
+The minimum coverage of merged contigs is 2.31034.
+Consider increasing the coverage threshold parameter, c, to 2.31034.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2453  44.1%
+Singleton   249  4.48%
+FR         1031  18.5%
+RF            6  0.108%
+FF            0
+Different  1825  32.8%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k58 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+416	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k58 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2453  44.1%
+Singleton   249  4.48%
+FR         1031  18.5%
+RF            6  0.108%
+FF            0
+Different  1825  32.8%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+416	177	72	101	115	134	160	146	360	24200	n=15 s=100
+416	177	72	101	115	134	160	146	360	24200	n=15 s=200
+416	177	72	101	115	134	160	146	360	24200	n=15 s=500
+416	177	72	101	115	134	160	146	360	24200	n=15 s=1000
+416	177	72	101	115	134	160	146	360	24200	n=15 s=2000
+416	177	72	101	115	134	160	146	360	24200	n=15 s=5000
+416	177	72	101	115	134	160	146	360	24200	n=16 s=100
+416	177	72	101	115	134	160	146	360	24200	n=16 s=200
+416	177	72	101	115	134	160	146	360	24200	n=16 s=500
+416	177	72	101	115	134	160	146	360	24200	n=16 s=1000
+416	177	72	101	115	134	160	146	360	24200	n=16 s=2000
+416	177	72	101	115	134	160	146	360	24200	n=16 s=5000
+416	177	72	101	115	134	160	146	360	24200	n=17 s=100
+416	177	72	101	115	134	160	146	360	24200	n=17 s=200
+416	177	72	101	115	134	160	146	360	24200	n=17 s=500
+416	177	72	101	115	134	160	146	360	24200	n=17 s=1000
+416	177	72	101	115	134	160	146	360	24200	n=17 s=2000
+416	177	72	101	115	134	160	146	360	24200	n=17 s=5000
+416	177	72	101	115	134	160	146	360	24200	n=18 s=100
+416	177	72	101	115	134	160	146	360	24200	n=18 s=200
+416	177	72	101	115	134	160	146	360	24200	n=18 s=500
+416	177	72	101	115	134	160	146	360	24200	n=18 s=1000
+416	177	72	101	115	134	160	146	360	24200	n=18 s=2000
+416	177	72	101	115	134	160	146	360	24200	n=18 s=5000
+416	177	72	101	115	134	160	146	360	24200	n=19 s=100
+416	177	72	101	115	134	160	146	360	24200	n=19 s=200
+416	177	72	101	115	134	160	146	360	24200	n=19 s=500
+416	177	72	101	115	134	160	146	360	24200	n=19 s=1000
+416	177	72	101	115	134	160	146	360	24200	n=19 s=2000
+416	177	72	101	115	134	160	146	360	24200	n=19 s=5000
+416	177	72	101	115	134	160	146	360	24200	n=20 s=100
+416	177	72	101	115	134	160	146	360	24200	n=20 s=200
+416	177	72	101	115	134	160	146	360	24200	n=20 s=500
+416	177	72	101	115	134	160	146	360	24200	n=20 s=1000
+416	177	72	101	115	134	160	146	360	24200	n=20 s=2000
+416	177	72	101	115	134	160	146	360	24200	n=20 s=5000
+
+Best scaffold N50 is 134 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+416	177	72	101	115	134	160	146	360	24200	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k58 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k66-kc2’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k66 -q3 --kc=2 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 2.
+The minimum coverage of merged contigs is 5.
+Consider increasing the coverage threshold parameter, c, to 5.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2558  46%
+Singleton   245  4.4%
+FR         1012  18.2%
+RF            4  0.0719%
+FF            0
+Different  1745  31.4%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k66 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+316	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k66 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2558  46%
+Singleton   245  4.4%
+FR         1012  18.2%
+RF            4  0.0719%
+FF            0
+Different  1745  31.4%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+316	172	69	100	130	142	177	159	360	25280	n=15 s=100
+316	172	69	100	130	142	177	159	360	25280	n=15 s=200
+316	172	69	100	130	142	177	159	360	25280	n=15 s=500
+316	172	69	100	130	142	177	159	360	25280	n=15 s=1000
+316	172	69	100	130	142	177	159	360	25280	n=15 s=2000
+316	172	69	100	130	142	177	159	360	25280	n=15 s=5000
+316	172	69	100	130	142	177	159	360	25280	n=16 s=100
+316	172	69	100	130	142	177	159	360	25280	n=16 s=200
+316	172	69	100	130	142	177	159	360	25280	n=16 s=500
+316	172	69	100	130	142	177	159	360	25280	n=16 s=1000
+316	172	69	100	130	142	177	159	360	25280	n=16 s=2000
+316	172	69	100	130	142	177	159	360	25280	n=16 s=5000
+316	172	69	100	130	142	177	159	360	25280	n=17 s=100
+316	172	69	100	130	142	177	159	360	25280	n=17 s=200
+316	172	69	100	130	142	177	159	360	25280	n=17 s=500
+316	172	69	100	130	142	177	159	360	25280	n=17 s=1000
+316	172	69	100	130	142	177	159	360	25280	n=17 s=2000
+316	172	69	100	130	142	177	159	360	25280	n=17 s=5000
+316	172	69	100	130	142	177	159	360	25280	n=18 s=100
+316	172	69	100	130	142	177	159	360	25280	n=18 s=200
+316	172	69	100	130	142	177	159	360	25280	n=18 s=500
+316	172	69	100	130	142	177	159	360	25280	n=18 s=1000
+316	172	69	100	130	142	177	159	360	25280	n=18 s=2000
+316	172	69	100	130	142	177	159	360	25280	n=18 s=5000
+316	172	69	100	130	142	177	159	360	25280	n=19 s=100
+316	172	69	100	130	142	177	159	360	25280	n=19 s=200
+316	172	69	100	130	142	177	159	360	25280	n=19 s=500
+316	172	69	100	130	142	177	159	360	25280	n=19 s=1000
+316	172	69	100	130	142	177	159	360	25280	n=19 s=2000
+316	172	69	100	130	142	177	159	360	25280	n=19 s=5000
+316	172	69	100	130	142	177	159	360	25280	n=20 s=100
+316	172	69	100	130	142	177	159	360	25280	n=20 s=200
+316	172	69	100	130	142	177	159	360	25280	n=20 s=500
+316	172	69	100	130	142	177	159	360	25280	n=20 s=1000
+316	172	69	100	130	142	177	159	360	25280	n=20 s=2000
+316	172	69	100	130	142	177	159	360	25280	n=20 s=5000
+
+Best scaffold N50 is 142 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+316	172	69	100	130	142	177	159	360	25280	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k66 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k74-kc2’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k74 -q3 --kc=2 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 2.
+The minimum coverage of merged contigs is 4.6.
+Consider increasing the coverage threshold parameter, c, to 4.6.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2714  48.8%
+Singleton   240  4.31%
+FR          922  16.6%
+RF            7  0.126%
+FF            0
+Different  1681  30.2%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k74 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+246	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k74 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2714  48.8%
+Singleton   240  4.31%
+FR          922  16.6%
+RF            7  0.126%
+FF            0
+Different  1681  30.2%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+246	165	88	100	123	147	185	164	434	24733	n=15 s=100
+246	165	88	100	123	147	185	164	434	24733	n=15 s=200
+246	165	88	100	123	147	185	164	434	24733	n=15 s=500
+246	165	88	100	123	147	185	164	434	24733	n=15 s=1000
+246	165	88	100	123	147	185	164	434	24733	n=15 s=2000
+246	165	88	100	123	147	185	164	434	24733	n=15 s=5000
+246	165	88	100	123	147	185	164	434	24733	n=16 s=100
+246	165	88	100	123	147	185	164	434	24733	n=16 s=200
+246	165	88	100	123	147	185	164	434	24733	n=16 s=500
+246	165	88	100	123	147	185	164	434	24733	n=16 s=1000
+246	165	88	100	123	147	185	164	434	24733	n=16 s=2000
+246	165	88	100	123	147	185	164	434	24733	n=16 s=5000
+246	165	88	100	123	147	185	164	434	24733	n=17 s=100
+246	165	88	100	123	147	185	164	434	24733	n=17 s=200
+246	165	88	100	123	147	185	164	434	24733	n=17 s=500
+246	165	88	100	123	147	185	164	434	24733	n=17 s=1000
+246	165	88	100	123	147	185	164	434	24733	n=17 s=2000
+246	165	88	100	123	147	185	164	434	24733	n=17 s=5000
+246	165	88	100	123	147	185	164	434	24733	n=18 s=100
+246	165	88	100	123	147	185	164	434	24733	n=18 s=200
+246	165	88	100	123	147	185	164	434	24733	n=18 s=500
+246	165	88	100	123	147	185	164	434	24733	n=18 s=1000
+246	165	88	100	123	147	185	164	434	24733	n=18 s=2000
+246	165	88	100	123	147	185	164	434	24733	n=18 s=5000
+246	165	88	100	123	147	185	164	434	24733	n=19 s=100
+246	165	88	100	123	147	185	164	434	24733	n=19 s=200
+246	165	88	100	123	147	185	164	434	24733	n=19 s=500
+246	165	88	100	123	147	185	164	434	24733	n=19 s=1000
+246	165	88	100	123	147	185	164	434	24733	n=19 s=2000
+246	165	88	100	123	147	185	164	434	24733	n=19 s=5000
+246	165	88	100	123	147	185	164	434	24733	n=20 s=100
+246	165	88	100	123	147	185	164	434	24733	n=20 s=200
+246	165	88	100	123	147	185	164	434	24733	n=20 s=500
+246	165	88	100	123	147	185	164	434	24733	n=20 s=1000
+246	165	88	100	123	147	185	164	434	24733	n=20 s=2000
+246	165	88	100	123	147	185	164	434	24733	n=20 s=5000
+
+Best scaffold N50 is 147 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+246	165	88	100	123	147	185	164	434	24733	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k74 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k82-kc2’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k82 -q3 --kc=2 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 2.
+The minimum coverage of merged contigs is 3.65625.
+Consider increasing the coverage threshold parameter, c, to 3.65625.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2837  51%
+Singleton   206  3.7%
+FR          879  15.8%
+RF           11  0.198%
+FF            0
+Different  1631  29.3%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k82 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+202	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k82 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2837  51%
+Singleton   206  3.7%
+FR          879  15.8%
+RF           11  0.198%
+FF            0
+Different  1631  29.3%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+202	156	68	100	120	163	191	165	392	23586	n=15 s=100
+202	156	68	100	120	163	191	165	392	23586	n=15 s=200
+202	156	68	100	120	163	191	165	392	23586	n=15 s=500
+202	156	68	100	120	163	191	165	392	23586	n=15 s=1000
+202	156	68	100	120	163	191	165	392	23586	n=15 s=2000
+202	156	68	100	120	163	191	165	392	23586	n=15 s=5000
+202	156	68	100	120	163	191	165	392	23586	n=16 s=100
+202	156	68	100	120	163	191	165	392	23586	n=16 s=200
+202	156	68	100	120	163	191	165	392	23586	n=16 s=500
+202	156	68	100	120	163	191	165	392	23586	n=16 s=1000
+202	156	68	100	120	163	191	165	392	23586	n=16 s=2000
+202	156	68	100	120	163	191	165	392	23586	n=16 s=5000
+202	156	68	100	120	163	191	165	392	23586	n=17 s=100
+202	156	68	100	120	163	191	165	392	23586	n=17 s=200
+202	156	68	100	120	163	191	165	392	23586	n=17 s=500
+202	156	68	100	120	163	191	165	392	23586	n=17 s=1000
+202	156	68	100	120	163	191	165	392	23586	n=17 s=2000
+202	156	68	100	120	163	191	165	392	23586	n=17 s=5000
+202	156	68	100	120	163	191	165	392	23586	n=18 s=100
+202	156	68	100	120	163	191	165	392	23586	n=18 s=200
+202	156	68	100	120	163	191	165	392	23586	n=18 s=500
+202	156	68	100	120	163	191	165	392	23586	n=18 s=1000
+202	156	68	100	120	163	191	165	392	23586	n=18 s=2000
+202	156	68	100	120	163	191	165	392	23586	n=18 s=5000
+202	156	68	100	120	163	191	165	392	23586	n=19 s=100
+202	156	68	100	120	163	191	165	392	23586	n=19 s=200
+202	156	68	100	120	163	191	165	392	23586	n=19 s=500
+202	156	68	100	120	163	191	165	392	23586	n=19 s=1000
+202	156	68	100	120	163	191	165	392	23586	n=19 s=2000
+202	156	68	100	120	163	191	165	392	23586	n=19 s=5000
+202	156	68	100	120	163	191	165	392	23586	n=20 s=100
+202	156	68	100	120	163	191	165	392	23586	n=20 s=200
+202	156	68	100	120	163	191	165	392	23586	n=20 s=500
+202	156	68	100	120	163	191	165	392	23586	n=20 s=1000
+202	156	68	100	120	163	191	165	392	23586	n=20 s=2000
+202	156	68	100	120	163	191	165	392	23586	n=20 s=5000
+
+Best scaffold N50 is 163 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+202	156	68	100	120	163	191	165	392	23586	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k82 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k90-kc2’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k90 -q3 --kc=2 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 2.33333.
+The minimum coverage of merged contigs is 9.86364.
+Consider increasing the coverage threshold parameter, c, to 9.86364.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2932  52.7%
+Singleton   327  5.88%
+FR          895  16.1%
+RF           19  0.341%
+FF            0
+Different  1391  25%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k90 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+137	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k90 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2932  52.7%
+Singleton   327  5.88%
+FR          895  16.1%
+RF           19  0.341%
+FF            0
+Different  1391  25%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+137	110	41	100	121	181	211	183	368	17933	n=15 s=100
+137	110	41	100	121	181	211	183	368	17933	n=15 s=200
+137	110	41	100	121	181	211	183	368	17933	n=15 s=500
+137	110	41	100	121	181	211	183	368	17933	n=15 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=15 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=15 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=16 s=100
+137	110	41	100	121	181	211	183	368	17933	n=16 s=200
+137	110	41	100	121	181	211	183	368	17933	n=16 s=500
+137	110	41	100	121	181	211	183	368	17933	n=16 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=16 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=16 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=17 s=100
+137	110	41	100	121	181	211	183	368	17933	n=17 s=200
+137	110	41	100	121	181	211	183	368	17933	n=17 s=500
+137	110	41	100	121	181	211	183	368	17933	n=17 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=17 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=17 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=18 s=100
+137	110	41	100	121	181	211	183	368	17933	n=18 s=200
+137	110	41	100	121	181	211	183	368	17933	n=18 s=500
+137	110	41	100	121	181	211	183	368	17933	n=18 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=18 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=18 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=19 s=100
+137	110	41	100	121	181	211	183	368	17933	n=19 s=200
+137	110	41	100	121	181	211	183	368	17933	n=19 s=500
+137	110	41	100	121	181	211	183	368	17933	n=19 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=19 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=19 s=5000
+137	110	41	100	121	181	211	183	368	17933	n=20 s=100
+137	110	41	100	121	181	211	183	368	17933	n=20 s=200
+137	110	41	100	121	181	211	183	368	17933	n=20 s=500
+137	110	41	100	121	181	211	183	368	17933	n=20 s=1000
+137	110	41	100	121	181	211	183	368	17933	n=20 s=2000
+137	110	41	100	121	181	211	183	368	17933	n=20 s=5000
+
+Best scaffold N50 is 181 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+137	110	41	100	121	181	211	183	368	17933	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k90 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k50-kc3’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k50 -q3 --kc=3 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 3.
+The minimum coverage of merged contigs is 7.5.
+Consider increasing the coverage threshold parameter, c, to 7.5.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2466  44.3%
+Singleton   286  5.14%
+FR         1039  18.7%
+RF            1  0.018%
+FF            0
+Different  1772  31.8%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k50 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+368	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k50 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2466  44.3%
+Singleton   286  5.14%
+FR         1039  18.7%
+RF            1  0.018%
+FF            0
+Different  1772  31.8%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+368	84	34	100	112	131	162	142	251	11253	n=15 s=100
+368	84	34	100	112	131	162	142	251	11253	n=15 s=200
+368	84	34	100	112	131	162	142	251	11253	n=15 s=500
+368	84	34	100	112	131	162	142	251	11253	n=15 s=1000
+368	84	34	100	112	131	162	142	251	11253	n=15 s=2000
+368	84	34	100	112	131	162	142	251	11253	n=15 s=5000
+368	84	34	100	112	131	162	142	251	11253	n=16 s=100
+368	84	34	100	112	131	162	142	251	11253	n=16 s=200
+368	84	34	100	112	131	162	142	251	11253	n=16 s=500
+368	84	34	100	112	131	162	142	251	11253	n=16 s=1000
+368	84	34	100	112	131	162	142	251	11253	n=16 s=2000
+368	84	34	100	112	131	162	142	251	11253	n=16 s=5000
+368	84	34	100	112	131	162	142	251	11253	n=17 s=100
+368	84	34	100	112	131	162	142	251	11253	n=17 s=200
+368	84	34	100	112	131	162	142	251	11253	n=17 s=500
+368	84	34	100	112	131	162	142	251	11253	n=17 s=1000
+368	84	34	100	112	131	162	142	251	11253	n=17 s=2000
+368	84	34	100	112	131	162	142	251	11253	n=17 s=5000
+368	84	34	100	112	131	162	142	251	11253	n=18 s=100
+368	84	34	100	112	131	162	142	251	11253	n=18 s=200
+368	84	34	100	112	131	162	142	251	11253	n=18 s=500
+368	84	34	100	112	131	162	142	251	11253	n=18 s=1000
+368	84	34	100	112	131	162	142	251	11253	n=18 s=2000
+368	84	34	100	112	131	162	142	251	11253	n=18 s=5000
+368	84	34	100	112	131	162	142	251	11253	n=19 s=100
+368	84	34	100	112	131	162	142	251	11253	n=19 s=200
+368	84	34	100	112	131	162	142	251	11253	n=19 s=500
+368	84	34	100	112	131	162	142	251	11253	n=19 s=1000
+368	84	34	100	112	131	162	142	251	11253	n=19 s=2000
+368	84	34	100	112	131	162	142	251	11253	n=19 s=5000
+368	84	34	100	112	131	162	142	251	11253	n=20 s=100
+368	84	34	100	112	131	162	142	251	11253	n=20 s=200
+368	84	34	100	112	131	162	142	251	11253	n=20 s=500
+368	84	34	100	112	131	162	142	251	11253	n=20 s=1000
+368	84	34	100	112	131	162	142	251	11253	n=20 s=2000
+368	84	34	100	112	131	162	142	251	11253	n=20 s=5000
+
+Best scaffold N50 is 131 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+368	84	34	100	112	131	162	142	251	11253	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k50 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k58-kc3’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k58 -q3 --kc=3 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2617  47%
+Singleton   293  5.27%
+FR          974  17.5%
+RF            2  0.0359%
+FF            0
+Different  1678  30.2%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k58 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+275	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k58 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2617  47%
+Singleton   293  5.27%
+FR          974  17.5%
+RF            2  0.0359%
+FF            0
+Different  1678  30.2%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+275	122	51	100	115	127	154	141	251	16336	n=15 s=100
+275	122	51	100	115	127	154	141	251	16336	n=15 s=200
+275	122	51	100	115	127	154	141	251	16336	n=15 s=500
+275	122	51	100	115	127	154	141	251	16336	n=15 s=1000
+275	122	51	100	115	127	154	141	251	16336	n=15 s=2000
+275	122	51	100	115	127	154	141	251	16336	n=15 s=5000
+275	122	51	100	115	127	154	141	251	16336	n=16 s=100
+275	122	51	100	115	127	154	141	251	16336	n=16 s=200
+275	122	51	100	115	127	154	141	251	16336	n=16 s=500
+275	122	51	100	115	127	154	141	251	16336	n=16 s=1000
+275	122	51	100	115	127	154	141	251	16336	n=16 s=2000
+275	122	51	100	115	127	154	141	251	16336	n=16 s=5000
+275	122	51	100	115	127	154	141	251	16336	n=17 s=100
+275	122	51	100	115	127	154	141	251	16336	n=17 s=200
+275	122	51	100	115	127	154	141	251	16336	n=17 s=500
+275	122	51	100	115	127	154	141	251	16336	n=17 s=1000
+275	122	51	100	115	127	154	141	251	16336	n=17 s=2000
+275	122	51	100	115	127	154	141	251	16336	n=17 s=5000
+275	122	51	100	115	127	154	141	251	16336	n=18 s=100
+275	122	51	100	115	127	154	141	251	16336	n=18 s=200
+275	122	51	100	115	127	154	141	251	16336	n=18 s=500
+275	122	51	100	115	127	154	141	251	16336	n=18 s=1000
+275	122	51	100	115	127	154	141	251	16336	n=18 s=2000
+275	122	51	100	115	127	154	141	251	16336	n=18 s=5000
+275	122	51	100	115	127	154	141	251	16336	n=19 s=100
+275	122	51	100	115	127	154	141	251	16336	n=19 s=200
+275	122	51	100	115	127	154	141	251	16336	n=19 s=500
+275	122	51	100	115	127	154	141	251	16336	n=19 s=1000
+275	122	51	100	115	127	154	141	251	16336	n=19 s=2000
+275	122	51	100	115	127	154	141	251	16336	n=19 s=5000
+275	122	51	100	115	127	154	141	251	16336	n=20 s=100
+275	122	51	100	115	127	154	141	251	16336	n=20 s=200
+275	122	51	100	115	127	154	141	251	16336	n=20 s=500
+275	122	51	100	115	127	154	141	251	16336	n=20 s=1000
+275	122	51	100	115	127	154	141	251	16336	n=20 s=2000
+275	122	51	100	115	127	154	141	251	16336	n=20 s=5000
+
+Best scaffold N50 is 127 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+275	122	51	100	115	127	154	141	251	16336	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k58 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k66-kc3’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k66 -q3 --kc=3 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 3.21429.
+The minimum coverage of merged contigs is 6.53333.
+Consider increasing the coverage threshold parameter, c, to 6.53333.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2745  49.3%
+Singleton   258  4.64%
+FR          983  17.7%
+RF            5  0.0899%
+FF            0
+Different  1573  28.3%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k66 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+192	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k66 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2745  49.3%
+Singleton   258  4.64%
+FR          983  17.7%
+RF            5  0.0899%
+FF            0
+Different  1573  28.3%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+192	103	43	101	131	147	180	159	279	15379	n=15 s=100
+192	103	43	101	131	147	180	159	279	15379	n=15 s=200
+192	103	43	101	131	147	180	159	279	15379	n=15 s=500
+192	103	43	101	131	147	180	159	279	15379	n=15 s=1000
+192	103	43	101	131	147	180	159	279	15379	n=15 s=2000
+192	103	43	101	131	147	180	159	279	15379	n=15 s=5000
+192	103	43	101	131	147	180	159	279	15379	n=16 s=100
+192	103	43	101	131	147	180	159	279	15379	n=16 s=200
+192	103	43	101	131	147	180	159	279	15379	n=16 s=500
+192	103	43	101	131	147	180	159	279	15379	n=16 s=1000
+192	103	43	101	131	147	180	159	279	15379	n=16 s=2000
+192	103	43	101	131	147	180	159	279	15379	n=16 s=5000
+192	103	43	101	131	147	180	159	279	15379	n=17 s=100
+192	103	43	101	131	147	180	159	279	15379	n=17 s=200
+192	103	43	101	131	147	180	159	279	15379	n=17 s=500
+192	103	43	101	131	147	180	159	279	15379	n=17 s=1000
+192	103	43	101	131	147	180	159	279	15379	n=17 s=2000
+192	103	43	101	131	147	180	159	279	15379	n=17 s=5000
+192	103	43	101	131	147	180	159	279	15379	n=18 s=100
+192	103	43	101	131	147	180	159	279	15379	n=18 s=200
+192	103	43	101	131	147	180	159	279	15379	n=18 s=500
+192	103	43	101	131	147	180	159	279	15379	n=18 s=1000
+192	103	43	101	131	147	180	159	279	15379	n=18 s=2000
+192	103	43	101	131	147	180	159	279	15379	n=18 s=5000
+192	103	43	101	131	147	180	159	279	15379	n=19 s=100
+192	103	43	101	131	147	180	159	279	15379	n=19 s=200
+192	103	43	101	131	147	180	159	279	15379	n=19 s=500
+192	103	43	101	131	147	180	159	279	15379	n=19 s=1000
+192	103	43	101	131	147	180	159	279	15379	n=19 s=2000
+192	103	43	101	131	147	180	159	279	15379	n=19 s=5000
+192	103	43	101	131	147	180	159	279	15379	n=20 s=100
+192	103	43	101	131	147	180	159	279	15379	n=20 s=200
+192	103	43	101	131	147	180	159	279	15379	n=20 s=500
+192	103	43	101	131	147	180	159	279	15379	n=20 s=1000
+192	103	43	101	131	147	180	159	279	15379	n=20 s=2000
+192	103	43	101	131	147	180	159	279	15379	n=20 s=5000
+
+Best scaffold N50 is 147 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+192	103	43	101	131	147	180	159	279	15379	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k66 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k74-kc3’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k74 -q3 --kc=3 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 3.44872.
+The minimum coverage of merged contigs is 5.71429.
+Consider increasing the coverage threshold parameter, c, to 5.71429.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2876  51.7%
+Singleton   233  4.19%
+FR          862  15.5%
+RF            5  0.0899%
+FF            0
+Different  1588  28.5%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k74 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+157	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k74 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  2876  51.7%
+Singleton   233  4.19%
+FR          862  15.5%
+RF            5  0.0899%
+FF            0
+Different  1588  28.5%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+157	105	44	100	125	148	184	160	285	15650	n=15 s=100
+157	105	44	100	125	148	184	160	285	15650	n=15 s=200
+157	105	44	100	125	148	184	160	285	15650	n=15 s=500
+157	105	44	100	125	148	184	160	285	15650	n=15 s=1000
+157	105	44	100	125	148	184	160	285	15650	n=15 s=2000
+157	105	44	100	125	148	184	160	285	15650	n=15 s=5000
+157	105	44	100	125	148	184	160	285	15650	n=16 s=100
+157	105	44	100	125	148	184	160	285	15650	n=16 s=200
+157	105	44	100	125	148	184	160	285	15650	n=16 s=500
+157	105	44	100	125	148	184	160	285	15650	n=16 s=1000
+157	105	44	100	125	148	184	160	285	15650	n=16 s=2000
+157	105	44	100	125	148	184	160	285	15650	n=16 s=5000
+157	105	44	100	125	148	184	160	285	15650	n=17 s=100
+157	105	44	100	125	148	184	160	285	15650	n=17 s=200
+157	105	44	100	125	148	184	160	285	15650	n=17 s=500
+157	105	44	100	125	148	184	160	285	15650	n=17 s=1000
+157	105	44	100	125	148	184	160	285	15650	n=17 s=2000
+157	105	44	100	125	148	184	160	285	15650	n=17 s=5000
+157	105	44	100	125	148	184	160	285	15650	n=18 s=100
+157	105	44	100	125	148	184	160	285	15650	n=18 s=200
+157	105	44	100	125	148	184	160	285	15650	n=18 s=500
+157	105	44	100	125	148	184	160	285	15650	n=18 s=1000
+157	105	44	100	125	148	184	160	285	15650	n=18 s=2000
+157	105	44	100	125	148	184	160	285	15650	n=18 s=5000
+157	105	44	100	125	148	184	160	285	15650	n=19 s=100
+157	105	44	100	125	148	184	160	285	15650	n=19 s=200
+157	105	44	100	125	148	184	160	285	15650	n=19 s=500
+157	105	44	100	125	148	184	160	285	15650	n=19 s=1000
+157	105	44	100	125	148	184	160	285	15650	n=19 s=2000
+157	105	44	100	125	148	184	160	285	15650	n=19 s=5000
+157	105	44	100	125	148	184	160	285	15650	n=20 s=100
+157	105	44	100	125	148	184	160	285	15650	n=20 s=200
+157	105	44	100	125	148	184	160	285	15650	n=20 s=500
+157	105	44	100	125	148	184	160	285	15650	n=20 s=1000
+157	105	44	100	125	148	184	160	285	15650	n=20 s=2000
+157	105	44	100	125	148	184	160	285	15650	n=20 s=5000
+
+Best scaffold N50 is 148 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+157	105	44	100	125	148	184	160	285	15650	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k74 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k82-kc3’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k82 -q3 --kc=3 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 3.51724.
+The minimum coverage of merged contigs is 18.5385.
+Consider increasing the coverage threshold parameter, c, to 18.5385.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  3036  54.6%
+Singleton   294  5.28%
+FR          878  15.8%
+RF            2  0.0359%
+FF            0
+Different  1354  24.3%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k82 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+118	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k82 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  3036  54.6%
+Singleton   294  5.28%
+FR          878  15.8%
+RF            2  0.0359%
+FF            0
+Different  1354  24.3%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+118	91	38	100	117	163	199	162	284	13671	n=15 s=100
+118	91	38	100	117	163	199	162	284	13671	n=15 s=200
+118	91	38	100	117	163	199	162	284	13671	n=15 s=500
+118	91	38	100	117	163	199	162	284	13671	n=15 s=1000
+118	91	38	100	117	163	199	162	284	13671	n=15 s=2000
+118	91	38	100	117	163	199	162	284	13671	n=15 s=5000
+118	91	38	100	117	163	199	162	284	13671	n=16 s=100
+118	91	38	100	117	163	199	162	284	13671	n=16 s=200
+118	91	38	100	117	163	199	162	284	13671	n=16 s=500
+118	91	38	100	117	163	199	162	284	13671	n=16 s=1000
+118	91	38	100	117	163	199	162	284	13671	n=16 s=2000
+118	91	38	100	117	163	199	162	284	13671	n=16 s=5000
+118	91	38	100	117	163	199	162	284	13671	n=17 s=100
+118	91	38	100	117	163	199	162	284	13671	n=17 s=200
+118	91	38	100	117	163	199	162	284	13671	n=17 s=500
+118	91	38	100	117	163	199	162	284	13671	n=17 s=1000
+118	91	38	100	117	163	199	162	284	13671	n=17 s=2000
+118	91	38	100	117	163	199	162	284	13671	n=17 s=5000
+118	91	38	100	117	163	199	162	284	13671	n=18 s=100
+118	91	38	100	117	163	199	162	284	13671	n=18 s=200
+118	91	38	100	117	163	199	162	284	13671	n=18 s=500
+118	91	38	100	117	163	199	162	284	13671	n=18 s=1000
+118	91	38	100	117	163	199	162	284	13671	n=18 s=2000
+118	91	38	100	117	163	199	162	284	13671	n=18 s=5000
+118	91	38	100	117	163	199	162	284	13671	n=19 s=100
+118	91	38	100	117	163	199	162	284	13671	n=19 s=200
+118	91	38	100	117	163	199	162	284	13671	n=19 s=500
+118	91	38	100	117	163	199	162	284	13671	n=19 s=1000
+118	91	38	100	117	163	199	162	284	13671	n=19 s=2000
+118	91	38	100	117	163	199	162	284	13671	n=19 s=5000
+118	91	38	100	117	163	199	162	284	13671	n=20 s=100
+118	91	38	100	117	163	199	162	284	13671	n=20 s=200
+118	91	38	100	117	163	199	162	284	13671	n=20 s=500
+118	91	38	100	117	163	199	162	284	13671	n=20 s=1000
+118	91	38	100	117	163	199	162	284	13671	n=20 s=2000
+118	91	38	100	117	163	199	162	284	13671	n=20 s=5000
+
+Best scaffold N50 is 163 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+118	91	38	100	117	163	199	162	284	13671	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k82 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+mkdir: cannot create directory ‘/work/hpk4/abyss_unmapped/test/k90-kc3’: File exists
+Running with max stack size of 65536 KB: abyss-bloom-dbg -k90 -q3 --kc=3 -b50G -j2 /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R1.fastq.gz /work/hpk4/abyss_unmapped/fasta/Am10_S43.unmapped.R2.fastq.gz
+The minimum coverage of single-end contigs is 3.77273.
+The minimum coverage of merged contigs is 13.6129.
+Consider increasing the coverage threshold parameter, c, to 13.6129.
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  3114  56%
+Singleton   271  4.87%
+FR          852  15.3%
+RF            1  0.018%
+FF            0
+Different  1326  23.8%
+Total      5564
+Running with max stack size of 65536 KB: SimpleGraph -s1000 -n10 -j2 -k90 -o AM10-4.path1 AM10-4.dot AM10-3.dist
+Reading `AM10-3.fa'...
+Writing `AM10-3.fa.fai'...
+Reading `AM10-4.fa'...
+Writing `AM10-4.fa.fai'...
+n	n:1000	L50	min	N75	N50	N25	E-size	max	sum	name
+90	0	0	0	0	0	0	0	0	0	AM10-4.path2
+Running with max stack size of 65536 KB: PathConsensus --dot -k90 -p0.9 -o AM10-5.path -s AM10-5.fa -g AM10-5.dot - AM10-4.dot AM10-4.path3
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0
+Building the suffix array...
+Building the Burrows-Wheeler transform...
+Building the character occurrence table...
+Mateless      0
+Unaligned  3114  56%
+Singleton   271  4.87%
+FR          852  15.3%
+RF            1  0.018%
+FF            0
+Different  1326  23.8%
+Total      5564
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+90	80	33	100	128	174	198	168	262	12643	n=15 s=100
+90	80	33	100	128	174	198	168	262	12643	n=15 s=200
+90	80	33	100	128	174	198	168	262	12643	n=15 s=500
+90	80	33	100	128	174	198	168	262	12643	n=15 s=1000
+90	80	33	100	128	174	198	168	262	12643	n=15 s=2000
+90	80	33	100	128	174	198	168	262	12643	n=15 s=5000
+90	80	33	100	128	174	198	168	262	12643	n=16 s=100
+90	80	33	100	128	174	198	168	262	12643	n=16 s=200
+90	80	33	100	128	174	198	168	262	12643	n=16 s=500
+90	80	33	100	128	174	198	168	262	12643	n=16 s=1000
+90	80	33	100	128	174	198	168	262	12643	n=16 s=2000
+90	80	33	100	128	174	198	168	262	12643	n=16 s=5000
+90	80	33	100	128	174	198	168	262	12643	n=17 s=100
+90	80	33	100	128	174	198	168	262	12643	n=17 s=200
+90	80	33	100	128	174	198	168	262	12643	n=17 s=500
+90	80	33	100	128	174	198	168	262	12643	n=17 s=1000
+90	80	33	100	128	174	198	168	262	12643	n=17 s=2000
+90	80	33	100	128	174	198	168	262	12643	n=17 s=5000
+90	80	33	100	128	174	198	168	262	12643	n=18 s=100
+90	80	33	100	128	174	198	168	262	12643	n=18 s=200
+90	80	33	100	128	174	198	168	262	12643	n=18 s=500
+90	80	33	100	128	174	198	168	262	12643	n=18 s=1000
+90	80	33	100	128	174	198	168	262	12643	n=18 s=2000
+90	80	33	100	128	174	198	168	262	12643	n=18 s=5000
+90	80	33	100	128	174	198	168	262	12643	n=19 s=100
+90	80	33	100	128	174	198	168	262	12643	n=19 s=200
+90	80	33	100	128	174	198	168	262	12643	n=19 s=500
+90	80	33	100	128	174	198	168	262	12643	n=19 s=1000
+90	80	33	100	128	174	198	168	262	12643	n=19 s=2000
+90	80	33	100	128	174	198	168	262	12643	n=19 s=5000
+90	80	33	100	128	174	198	168	262	12643	n=20 s=100
+90	80	33	100	128	174	198	168	262	12643	n=20 s=200
+90	80	33	100	128	174	198	168	262	12643	n=20 s=500
+90	80	33	100	128	174	198	168	262	12643	n=20 s=1000
+90	80	33	100	128	174	198	168	262	12643	n=20 s=2000
+90	80	33	100	128	174	198	168	262	12643	n=20 s=5000
+
+Best scaffold N50 is 174 at n=15 s=100.
+
+n	n:100	L50	min	N75	N50	N25	E-size	max	sum	name
+90	80	33	100	128	174	198	168	262	12643	n=15 s=100
+Running with max stack size of 65536 KB: PathConsensus --dot -k90 -p0.9 -s AM10-7.fa -g AM10-7.dot -o AM10-7.path AM10-6.fa AM10-6.dot AM10-6.path
+Ambiguous paths: 0
+Merged:          0
+No paths:        0
+Too many paths:  0
+Too complex:     0
+Dissimilar:      0

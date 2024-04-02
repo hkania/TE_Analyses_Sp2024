@@ -1,0 +1,73 @@
+make: Entering directory '/work/hpk4/abyss_unmapped/P1'
+abyss-stack-size 65536 abyss-bloom-dbg -k90 -q3  -b50G -j2  /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R1.fastq.gz /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R2.fastq.gz  > P1-1.fa
+AdjList    -k90 -m50 --dot P1-1.fa >P1-1.dot
+abyss-rresolver-short  -b50G -f0.8 -j2 -k90 \
+ -h P1-1-rr --dot -c P1-1-rr.fa \
+-g P1-1-rr.dot P1-1.fa P1-1.dot /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R1.fastq.gz /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R2.fastq.gz 
+abyss-filtergraph  --dot   -k90 -g P1-2.dot1 P1-1-rr.dot P1-1-rr.fa >P1-1-rr.path
+MergeContigs --dot   -k90 -g P1-2.dot -o P1-2.fa P1-1-rr.fa P1-2.dot1 P1-1-rr.path
+PopBubbles  --dot -j2 -k90  -p0.9  -g P1-3.dot P1-2.fa P1-2.dot >P1-2.path
+MergeContigs   -k90 -o P1-3.fa P1-2.fa P1-2.dot P1-2.path
+awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
+	P1-2.path P1-1-rr.fa >P1-indel.fa
+ln -sf P1-3.fa P1-unitigs.fa
+abyss-map   -j2 -l40    /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R1.fastq.gz /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R2.fastq.gz P1-3.fa \
+	|abyss-fixmate   -l40  -h P1-3.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   -j2 -k90  -l40 -s1000 -n10  -o P1-3.dist P1-3.hist
+Overlap  --dot   -k90 -g P1-4.dot -o P1-4.fa P1-3.fa P1-3.dot P1-3.dist
+Overlap: 0
+Scaffold: 0
+No overlap: 0
+Insignificant (<5bp): 0
+Homopolymer: 0
+Motif: 0
+Ambiguous: 0
+abyss-stack-size 65536 SimpleGraph   -s1000 -n10  -j2 -k90 -o P1-4.path1 P1-4.dot P1-3.dist
+Seed too short: 0
+Seeds with no edges: 0
+Edges removed: 0
+Total paths attempted: 0
+Unique path: 0
+No possible paths: 0
+No valid paths: 0
+Repetitive: 0
+Multiple valid paths: 0
+Too many solutions: 0
+Too complex: 0
+
+The minimum number of pairs in a distance estimate is 4294967295.
+abyss-index  --fai P1-3.fa
+abyss-index  --fai P1-4.fa
+cat P1-3.fa.fai P1-4.fa.fai \
+	| MergePaths   -j2 -k90 -s1000  -o P1-4.path2 - P1-4.path1
+Ignored 0 paths whose seeds are shorter than 1000 bp.
+PathOverlap --assemble   -k90  P1-4.dot P1-4.path2 >P1-4.path3
+cat P1-3.fa P1-4.fa \
+	| abyss-stack-size 65536 PathConsensus  --dot -k90  -p0.9  -o P1-5.path -s P1-5.fa -g P1-5.dot - P1-4.dot P1-4.path3
+cat P1-3.fa P1-4.fa P1-5.fa | MergeContigs   -k90 -o P1-6.fa - P1-5.dot P1-5.path
+ln -sf P1-6.fa P1-contigs.fa
+PathOverlap --overlap   -k90 --dot P1-5.dot P1-5.path >P1-6.dot
+ln -sf P1-6.dot P1-contigs.dot
+abyss-map   -j2 -l40    /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R1.fastq.gz /datacommons/yoderlab/users/CAROSEG/Petriky_mistery/MALARIA/Unmapped_reads/P1_S17.unmapped.R2.fastq.gz P1-6.fa \
+	|abyss-fixmate   -l40  -h P1-6.hist \
+	|sort -snk3 -k4 \
+	|DistanceEst   --dot --median -j2 -k90  -l40 -s1000 -n10  -o P1-6.dist.dot P1-6.hist
+abyss-scaffold    -k90 -s100-5000 -n15-20 -g P1-6.path.dot  P1-6.dot P1-6.dist.dot >P1-6.path
+abyss-stack-size 65536 PathConsensus  --dot -k90  -p0.9  -s P1-7.fa -g P1-7.dot -o P1-7.path P1-6.fa P1-6.dot P1-6.path
+cat P1-6.fa P1-7.fa \
+	| MergeContigs   -k90 -o P1-8.fa - P1-7.dot P1-7.path
+ln -sf P1-8.fa P1-scaffolds.fa
+PathOverlap --overlap   -k90 --dot P1-7.dot P1-7.path >P1-8.dot
+ln -sf P1-8.dot P1-scaffolds.dot
+abyss-fac   P1-unitigs.fa P1-contigs.fa P1-scaffolds.fa |tee P1-stats.tab
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+18	0	0	0	0	0	0	0	0	0	P1-unitigs.fa
+18	0	0	0	0	0	0	0	0	0	P1-contigs.fa
+18	0	0	0	0	0	0	0	0	0	P1-scaffolds.fa
+ln -sf P1-stats.tab P1-stats
+tr '\t' , <P1-stats.tab >P1-stats.csv
+abyss-tabtomd P1-stats.tab >P1-stats.md
+make: Leaving directory '/work/hpk4/abyss_unmapped/P1'
+n	n:500	L50	min	N75	N50	N25	E-size	max	sum	name
+18	0	0	0	0	0	0	0	0	0	/work/hpk4/abyss_unmapped/P1/P1-scaffolds.fa
