@@ -1,0 +1,10 @@
+/cwork/hpk4/megahit/assemblies/If1_S59.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/If3_S56.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/Tsim6_S57.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/If4_S30.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/Tsim7_S36.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/Tsim8_S31.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/Tsim9_S34.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/P2_S48.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/If2_S47.unmapped.assembly/final.contigs.fa
+/cwork/hpk4/megahit/assemblies/Tsim5_S44.unmapped.assembly/final.contigs.fa
