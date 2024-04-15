@@ -7,6 +7,7 @@ Transposable elements (TEs) are selfish genetic units that amplify their own rep
 De novo modeling pipelines for identifying TEs in genomes include well known RepeatModeler and EDTA. I will use EarlGrey, a newly developed pipeline that takes advantage of RepeatModeler and adds additional steps to return further curated TE sequences. Importantly, a comprehensive benchmarking paper for de novo TE annotation pipelines has not been established. This can make it tricky to decide which software to use when working with new genomes. 
 
 **Consequently, there are two relevant challenges I will address in my final project for Biology 724D Spring 2024.** 
+  * Update: As of April 15, 2024 only the first aim will be addressed as part of the final project. Aim two will be addressed separately. It is still contained here for Hannah's organization.
 
 ## Aims
 First, I aim to blast the unmapped reads from whole genome short read sequences against the Dfam or Rebpase databases and/or send them through a TE annotation pipeline. 
