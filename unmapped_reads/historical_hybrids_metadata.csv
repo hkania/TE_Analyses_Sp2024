@@ -1,0 +1,97 @@
+ID,ID2,species,Sampling_trip,location,Question,sample_group
+M444,8478-S2,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M425,8478-S12,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M428,8478-S20,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M442,8478-S23,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M436,8478-S24,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M459,8478-S25,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M431,8478-S26,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M430,8478-S28,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M434,8478-S29,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M441,8478-S32,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M443,8478-S33,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M460,8478-S35,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M469,8478-S37,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M454,8478-S39,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M445,8478-S40,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M241,8478-S41,N/A,Gligor/historical_samples,Lokaro,hybridization,old_samples
+M438,8478-S42,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M440,8478-S43,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M455,8478-S46,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M452,8478-S47,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M433,8478-S50,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M426,8478-S52,N/A,Gligor/historical_samples,Sarikady,hybridization,old_samples
+M453,8478-S54,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M450,8478-S55,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M466,8478-S56,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M448,8478-S57,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M281,8478-S62,N/A,Gligor/historical_samples,Mahavelo,hybridization,old_samples
+M446,8478-S63,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M456,8478-S65,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M245,8478-S66,N/A,Gligor/historical_samples,Lokaro,hybridization,old_samples
+M447,8478-S67,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M465,8478-S68,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M243,8478-S70,N/A,Gligor/historical_samples,Lokaro,hybridization,old_samples
+M439,8478-S71,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M242,8478-S73,N/A,Gligor/historical_samples,Lokaro,hybridization,old_samples
+M427,8478-S74,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M468,8478-S75,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M467,8478-S76,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M244,8478-S77,N/A,Gligor/historical_samples,Lokaro,hybridization,old_samples
+M462,8478-S78,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M437,8478-S79,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M464,8478-S80,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M432,8478-S81,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M457,8478-S82,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M458,8478-S83,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M240,8478-S84,N/A,Gligor/historical_samples,Lokaro,hybridization,old_samples
+M463,8478-S85,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M449,8478-S86,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M471,8478-S87,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M451,8478-S88,N/A,Gligor/historical_samples,Ampihamy,hybridization,old_samples
+M461,8478-S89,N/A,Gligor/historical_samples,Anjà,hybridization,old_samples
+M285,8478-S90,N/A,Gligor/historical_samples,Mahavelo,hybridization,old_samples
+M239,8478-S91,N/A,Gligor/historical_samples,Lokaro,hybridization,old_samples
+M429,8478-S92,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+M435,8478-S94,N/A,Gligor/historical_samples,Ankilivalo,hybridization,old_samples
+Hops II,8478-S38,murinus,DLC_2022,Durham,paternity,DLC
+Plumeria,8478-S53,murinus,DLC_2022,Durham,paternity,DLC
+Daffodil,8478-S58,murinus,DLC_2022,Durham,paternity,DLC
+Phlox,8478-S59,murinus,DLC_2022,Durham,paternity,DLC
+Tiger Lily,8478-S69,murinus,DLC_2022,Durham,paternity,DLC
+Timothy,8478-S72,murinus,DLC_2022,Durham,paternity,DLC
+Wandering Willie,8478-S93,murinus,DLC_2022,Durham,paternity,DLC
+Virginia Creeper,8478-S95,murinus,DLC_2022,Durham,paternity,DLC
+Hellebore,8478-S96,murinus,DLC_2022,Durham,paternity,DLC
+Am2,8478-S27,N/A,Mada2022,Ambatosirongorongo,species_identity/hybridization,new_samples
+Am10,8478-S44,N/A,Mada2022,Ambatosirongorongo,species_identity/hybridization,new_samples
+If4,8478-S30,N/A,Mada2022,Ifotaka,species_identity/hybridization,new_samples
+If2,8478-S49,N/A,Mada2022,Ifotaka,species_identity/hybridization,new_samples
+If3,8478-S60,N/A,Mada2022,Ifotaka,species_identity/hybridization,new_samples
+If1,8478-S64,N/A,Mada2022,Ifotaka,species_identity/hybridization,new_samples
+P1,8478-S17,N/A,Mada2022,Petricky,species_identity/hybridization,new_samples
+P2,8478-S51,N/A,Mada2022,Petricky,species_identity/hybridization,new_samples
+Tsim8,8478-S31,N/A,Mada2022,Tsimelahy,species_identity/hybridization,new_samples
+Tsim9,8478-S34,N/A,Mada2022,Tsimelahy,species_identity/hybridization,new_samples
+Tsim7,8478-S36,N/A,Mada2022,Tsimelahy,species_identity/hybridization,new_samples
+Tsim5,8478-S45,N/A,Mada2022,Tsimelahy,species_identity/hybridization,new_samples
+Tsim6,8478-S61,N/A,Mada2022,Tsimelahy,species_identity/hybridization,new_samples
+MBB0526,8478-S48,N/A,Tsihomanaomby,Tsihomanaomby,species_identity/hybridization,new_samples
+Masetto,8478-S9,danfossi ,2017,Anjajavy,N/A,danfossi
+Susanna,8478-S18,danfossi ,2017,Anjajavy,N/A,danfossi
+Lekely,8478-S1,danfossi ,2017,Anjajavy,N/A,danfossi
+Orfeo,8478-S3,danfossi ,2017,Anjajavy,N/A,danfossi
+Dorabella,8478-S4,danfossi ,2017,Anjajavy,N/A,danfossi
+Zerlina,8478-S5,danfossi ,2017,Anjajavy,N/A,danfossi
+Wotan,8478-S7,danfossi ,2017,Anjajavy,N/A,danfossi
+Elvira,8478-S8,danfossi ,2017,Anjajavy,N/A,danfossi
+Jenufa,8478-S10,danfossi ,2017,Anjajavy,N/A,danfossi
+Farany,8478-S19,danfossi ,2017,Anjajavy,N/A,danfossi
+Ilia,8478-S21,danfossi ,2017,Anjajavy,N/A,danfossi
+Dean Fossey,8478-S22,danfossi ,2017,Anjajavy,N/A,danfossi
+M5,8478-S6,murinus,Marina,Kirindi,N/A,marina_sample
+M4,8478-S11,murinus,Marina,west,N/A,marina_sample
+M3,8478-S13,murinus,Marina,west,N/A,marina_sample
+M1,8478-S14,murinus,Marina,west,N/A,marina_sample
+M2,8478-S15,murinus,Marina,west,N/A,marina_sample
+M6,8478-S16,murinus,Marina,west,N/A,marina_sample
