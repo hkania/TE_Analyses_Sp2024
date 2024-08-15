@@ -1,0 +1,18 @@
+Software_Names	Software_Wget_Links
+RepeatModeler-2.0.5	https://www.repeatmasker.org/RepeatMasker/RepeatMasker-4.1.6.tar.gz
+cd-hit-v4.8.1-2019-0228	https://github.com/weizhongli/cdhit/releases/download/V4.8.1/cd-hit-v4.8.1-2019-0228.tar.gz
+genometools-1.6.2	http://genometools.org/pub/genometools-1.6.2.tar.gz
+LTR_retriever-2.9.0	https://github.com/oushujun/LTR_retriever/archive/refs/tags/v2.9.0.tar.gz > ltr_retriever_v2.9.0.tar.gz
+mafft-7.490-with-extensions	https://mafft.cbrc.jp/alignment/software/mafft-7.490-with-extensions-src.tgz
+NINJA-0.95-cluster_only	https://github.com/TravisWheelerLab/NINJA/archive/refs/tags/0.95-cluster_only.tar.gz
+RECON-1.08	http://www.repeatmasker.org/RepeatModeler/RECON-1.08.tar.gz
+RepeatScout-1.0.6	http://www.repeatmasker.org/RepeatScout-1.0.6.tar.gz
+rmblast-2.14.1	https://www.repeatmasker.org/rmblast/rmblast-2.14.1+-x64-linux.tar.gz
+trf409.linux64	https://github.com/Benson-Genomics-Lab/TRF/releases/download/v4.09.1/trf409.linux64
+RepeatMasker-4.1.6	https://www.repeatmasker.org/RepeatMasker/RepeatMasker-4.1.6.tar.gz
+
+Downloaded and Installed following directions from Daren Card @ https://darencard.net/blog/2022-10-13-install-repeat-modeler-masker/
+* Note newer versions of RepeatModeler, RepeatMasker, & rmblast
+
+RepeatMasker Installed following directions @ https://www.repeatmasker.org/RepeatMasker/
+* Configured with Dfam38 partitions 0 and 4: https://www.dfam.org/releases/Dfam_3.8/families/FamDB/dfam38_full.0.h5.gz & https://www.dfam.org/releases/Dfam_3.8/families/FamDB/dfam38_full.4.h5.gz, and RepBase https://www.girinst.org/server/RepBase/protected/repeatmaskerlibraries/RepBaseRepeatMaskerEdition-20181026.tar.gz ; see all Dfam partition options here https://github.com/Dfam-consortium/FamDB
