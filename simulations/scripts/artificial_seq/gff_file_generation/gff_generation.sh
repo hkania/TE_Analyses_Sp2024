@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-#SBATCH --output=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/scripts/gff_gen_outputs/myoluc_test_full.out
-#SBATCH --error=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/scripts/gff_gen_outputs/myoluc_test_full.err
+#SBATCH --output=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/scripts/gff_gen_outputs/scer_test_full.out
+#SBATCH --error=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/scripts/gff_gen_outputs/scer_test_full.err
 #SBATCH --partition=yoderlab
 #SBATCH --account=yoderlab
 #SBATCH --mail-type=ALL
@@ -20,10 +20,10 @@
 
 #### GENERAL DEFINITIONS NECESSARY FOR THE SCRIPT ####
 
-END=2 #total number of sequences generated with Garlic run, minus 1
-model=myoluc #model used for fake fastas
+END=4 #total number of sequences generated with Garlic run, minus 1
+model=scer #model used for fake fastas
 export model #sets model variable for later on awk script
-out_header=myoluc2_100Mb_fin #header of the output log file, based on DCC organization
+out_header=scer_inv_100Mb_fin #header of the output log file, based on DCC organization
 log_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/${out_header}.err #log file path
 LAST=$((${END}+1)) #total number of sequences generated
 echo "Last = ${LAST}"
@@ -136,95 +136,95 @@ echo "#############################"
 ## 		In this section, the log file produced by Garlic is parsed into files for each sequence generated.	 ##
 ###########################################################################################################################
 
-#echo "###Starting Section 2, Part A, Splitting last log file"
-#echo "#############################"
-#date
-#echo "#############################"
+echo "###Starting Section 2, Part A, Splitting last log file"
+echo "#############################"
+date
+echo "#############################"
 
-#for num in $(seq ${LAST} ${LAST}); do #for the last query sequence in the inserts file, the only thing that really changes is the definition of the end line, which will be the last line of the input file instead of the next artificial sequence since there isn't one.
+for num in $(seq ${LAST} ${LAST}); do #for the last query sequence in the inserts file, the only thing that really changes is the definition of the end line, which will be the last line of the input file instead of the next artificial sequence since there isn't one.
 
-#	echo "current artificial sequence num: ${model}_artificial_sequence_${num}"
-#	line_with_create=$(grep -n "creating new sequence ( length 100000000 )" ${log_file} | head -n ${num} | tail -n 1 | cut -d : -f 1)
-#	line_of_build=$(grep -n "Base sequence generated (100000000 bases)" ${log_file} | head -n ${num} | tail -n 1 | cut -d : -f 1)
-#	next_seq_start=$(cat ${log_file} | wc -l) #define the next sequence start number, which should be the last line of the log file
-#	echo "create line: ${line_with_create}"
-#	echo "build line: ${line_of_build}"
-#	echo "stop line: ${next_seq_start}"
-#	diff_num_1=$((${next_seq_start}-${line_with_create}+1))
-#	diff_num_2=$((${next_seq_start}-${line_with_create}))
-#	echo "head check below:"
-#	cat ${log_file} | head -n ${next_seq_start} | tail -n ${diff_num_1} | head -n ${diff_num_2} | head -n 1
-#	echo "tail check below:"
-#	cat ${log_file} | head -n ${next_seq_start} | tail -n ${diff_num_1} | head -n ${diff_num_2} | tail -n 1
-#	output_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_log_${num}.txt #define the output file based on the model and artificial sequence number
-#	cat ${log_file} | head -n ${next_seq_start} | tail -n ${diff_num_1} | head -n ${diff_num_2} > ${output_file}
+	echo "current artificial sequence num: ${model}_artificial_sequence_${num}"
+	line_with_create=$(grep -n "creating new sequence ( length 100000000 )" ${log_file} | head -n ${num} | tail -n 1 | cut -d : -f 1)
+	line_of_build=$(grep -n "Base sequence generated (100000000 bases)" ${log_file} | head -n ${num} | tail -n 1 | cut -d : -f 1)
+	next_seq_start=$(cat ${log_file} | wc -l) #define the next sequence start number, which should be the last line of the log file
+	echo "create line: ${line_with_create}"
+	echo "build line: ${line_of_build}"
+	echo "stop line: ${next_seq_start}"
+	diff_num_1=$((${next_seq_start}-${line_with_create}+1))
+	diff_num_2=$((${next_seq_start}-${line_with_create}))
+	echo "head check below:"
+	cat ${log_file} | head -n ${next_seq_start} | tail -n ${diff_num_1} | head -n ${diff_num_2} | head -n 1
+	echo "tail check below:"
+	cat ${log_file} | head -n ${next_seq_start} | tail -n ${diff_num_1} | head -n ${diff_num_2} | tail -n 1
+	output_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_log_${num}.txt #define the output file based on the model and artificial sequence number
+	cat ${log_file} | head -n ${next_seq_start} | tail -n ${diff_num_1} | head -n ${diff_num_2} > ${output_file}
 
-#	number_inserts=$(grep "Inserting:" ${output_file} | wc -l)
-#	echo "Number of inserts in artificial seq ${num} : ${number_inserts}"
-#	output_file_2=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_inserts_list_${num}.txt #define the output for the inserts of the num artificial sequence based on the log file
-#	grep "Inserting:" ${output_file} > ${output_file_2}
-#	number_inserts_final=$(cat ${output_file_2} | wc -l)
-#	echo "Number of finalized inserts in artificial seq ${model}_artificial_sequence_${num} : ${number_inserts_final}"
+	number_inserts=$(grep "Inserting:" ${output_file} | wc -l)
+	echo "Number of inserts in artificial seq ${num} : ${number_inserts}"
+	output_file_2=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_inserts_list_${num}.txt #define the output for the inserts of the num artificial sequence based on the log file
+	grep "Inserting:" ${output_file} > ${output_file_2}
+	number_inserts_final=$(cat ${output_file_2} | wc -l)
+	echo "Number of finalized inserts in artificial seq ${model}_artificial_sequence_${num} : ${number_inserts_final}"
 
-###################################################################################################################################################
-## 		PART B: DEFINING TEs 														 ##
-## 		In this secion the nested and single inserts for each artifical sequence are defined and printed to separate output files.	 ##
-###################################################################################################################################################
+##################################################################################################################################################
+# 		PART B: DEFINING TEs 														 ##
+# 		In this secion the nested and single inserts for each artifical sequence are defined and printed to separate output files.	 ##
+##################################################################################################################################################
 
-#	echo "###Starting Section 2, Part B, Defining TEs for seq num ${model}_artificial_sequence_${num}"
-#	echo "#############################"
-#	date
-#	echo "#############################"
+echo "###Starting Section 2, Part B, Defining TEs for seq num ${model}_artificial_sequence_${num}"
+echo "#############################"
+date
+echo "#############################"
 
-#	output_file_3=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_inserts_nest_${num}.txt #define the output file which only includes the nested inserts 
-#	awk '$5 ~ /,/ {print $0}' ${output_file_2} >> ${output_file_3} #use awk to grab nested inserts, which have a comma in their 5th field (commas in the actual repeat content defining nested inserts)
-#	output_file_4=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_inserts_sing_${num}.txt #define the output file which only includes non-nested, single inserts
-#	awk '$5 ~ /,/ { next } { print $0 }' ${output_file_2} >> ${output_file_4} #use awk to skip lines which have commas and only print lines without commas in the fifth field
-#	echo "Head of nested TE file"
-#	head ${output_file_3} -n 1 #check first output is actually nested
-#	echo "Head of single TE file"
-#	head ${output_file_4} -n 2 #check second output is not nested
-#	num_nest_inserts=$(cat ${output_file_3} | wc -l) #count number of nested inserts
-#	num_sing_inserts=$(cat ${output_file_4} | wc -l) #count number of single inserts
-#	total_num_inserts_defined=$((${num_nest_insersts}+${num_sing_inserts}))
-#	echo "total inserts: ${number_inserts_final}, defined inserts: ${total_num_inserts_defined}, singular inserts: ${num_sing_inserts}, nested inserts: ${num_nest_inserts}" #check to make sure totals are adding up
+	output_file_3=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_inserts_nest_${num}.txt #define the output file which only includes the nested inserts 
+	awk '$5 ~ /,/ {print $0}' ${output_file_2} >> ${output_file_3} #use awk to grab nested inserts, which have a comma in their 5th field (commas in the actual repeat content defining nested inserts)
+	output_file_4=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_inserts_sing_${num}.txt #define the output file which only includes non-nested, single inserts
+	awk '$5 ~ /,/ { next } { print $0 }' ${output_file_2} >> ${output_file_4} #use awk to skip lines which have commas and only print lines without commas in the fifth field
+	echo "Head of nested TE file"
+	head ${output_file_3} -n 1 #check first output is actually nested
+	echo "Head of single TE file"
+	head ${output_file_4} -n 2 #check second output is not nested
+	num_nest_inserts=$(cat ${output_file_3} | wc -l) #count number of nested inserts
+	num_sing_inserts=$(cat ${output_file_4} | wc -l) #count number of single inserts
+	total_num_inserts_defined=$((${num_nest_insersts}+${num_sing_inserts}))
+	echo "total inserts: ${number_inserts_final}, defined inserts: ${total_num_inserts_defined}, singular inserts: ${num_sing_inserts}, nested inserts: ${num_nest_inserts}" #check to make sure totals are adding up
 
-###########################################################################################################################################
-## 		PART C: NESTED TE CONSENSUS SEQUENCES 																						 	 ##
-## 		In this section the nested TE sequences and resulting consensus sequences are printed to a final file for downstream analyses.	 ##
-###########################################################################################################################################
+##########################################################################################################################################
+# 		PART C: NESTED TE CONSENSUS SEQUENCES 																						 	 ##
+# 		In this section the nested TE sequences and resulting consensus sequences are printed to a final file for downstream analyses.	 ##
+##########################################################################################################################################
 
-#	echo "###Starting Section 2, Part C, Nested TE consensus seqs for seq num ${model}_artificial_sequence_${num}"
-#	echo "#############################"
-#	date
-#	echo "#############################"
+echo "###Starting Section 2, Part C, Nested TE consensus seqs for seq num ${model}_artificial_sequence_${num}"
+echo "#############################"
+date
+echo "#############################"
 
-#	search_term=$(cat ${output_file_3} | cut -f 2) #define the search term based on the second field of the nested inserts file
-#	search_count=$(cat ${output_file_3} | cut -f 2 | wc -l) #count how many nested inserts
-#	echo "Count starting file: ${search_count}" #echo the number of nested inserts
-#	search_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/fake_fastas/${model}/${model}.inserts.split/${model}_${num}_inserts.txt #define the search file (the file containing all of the inserts and their sequences, generated by garlic itself and not the log file)
-#	nest_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_int_nest_${num}_file #define an intermediate nested sequence file
-#	echo "Nested file: ${nest_file}"
-#	for stop in ${search_term[@]}; do #for every search term, grab the search term in the search file and print the result to the intermediate nested file
-#               grep -w "${stop}" ${search_file} >> ${nest_file}
-#        done
+	search_term=$(cat ${output_file_3} | cut -f 2) #define the search term based on the second field of the nested inserts file
+	search_count=$(cat ${output_file_3} | cut -f 2 | wc -l) #count how many nested inserts
+	echo "Count starting file: ${search_count}" #echo the number of nested inserts
+	search_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/fake_fastas/${model}/${model}.inserts.split/${model}_${num}_inserts.txt #define the search file (the file containing all of the inserts and their sequences, generated by garlic itself and not the log file)
+	nest_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}_int_nest_${num}_file #define an intermediate nested sequence file
+	echo "Nested file: ${nest_file}"
+	for stop in ${search_term[@]}; do #for every search term, grab the search term in the search file and print the result to the intermediate nested file
+              grep -w "${stop}" ${search_file} >> ${nest_file}
+	done
 
-#        amount=$(cat ${nest_file} | wc -l) #count the amount of inserts in the nested file
-#        echo "Nested file count: ${amount}"
-#        final_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/final_${model}_${num}_nested.txt #define the final nested insert file
-#        echo "Final file: ${final_file}"
-#        awk '$4 ~ /,/ {print $0}' ${nest_file} | sort --unique >> ${final_file} #only keep terms that are nested TE (contain commas), and only keep unique returns
-#        amount_2=$(cat ${final_file} | wc -l) #count the number of final nested TEs in the nest file
-#        echo "Final file count: ${amount_2}, should match search count: ${search_count}" #
-#        echo "Removing intermediate files: ${nest_file}"
-#        rm ${nest_file}
+	amount=$(cat ${nest_file} | wc -l) #count the amount of inserts in the nested file
+	echo "Nested file count: ${amount}"
+	final_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/final_${model}_${num}_nested.txt #define the final nested insert file
+	echo "Final file: ${final_file}"
+	awk '$4 ~ /,/ {print $0}' ${nest_file} | sort --unique >> ${final_file} #only keep terms that are nested TE (contain commas), and only keep unique returns
+	amount_2=$(cat ${final_file} | wc -l) #count the number of final nested TEs in the nest file
+	echo "Final file count: ${amount_2}, should match search count: ${search_count}" #
+	echo "Removing intermediate files: ${nest_file}"
+	rm ${nest_file}
 
-#done
+done
 
-#echo "###Finished Section 2, splitting last log file and defining TEs"
-#echo "#############################"
-#date
-#echo "#############################"
+echo "###Finished Section 2, splitting last log file and defining TEs"
+echo "#############################"
+date
+echo "#############################"
 
 ##### SECTION 3 FOR ALL SEQUENCES #####
 
@@ -284,7 +284,7 @@ echo "#############################"
 
 mkdir -p /datacommons/yoderlab/users/hkania/garlic_gffs/${model} #make a directory for gff files
 
-for num in $(seq 1 ${END}); do
+for num in $(seq 1 ${LAST}); do
     echo "Sequence number: ${model}_artificial_sequence_${num}" #define the sequence number
 
     sing_file=/datacommons/yoderlab/programs/Garlic-1.4/Garlic-1.4/log/split_art_logs/${model}/single/${model}_inserts_sing_${num}.txt #define the file with single TE inserts
@@ -330,7 +330,7 @@ echo "#############################"
 date
 echo "#############################"
 
-for num in $(seq 1 ${END}); do
+for num in $(seq 1 ${LAST}); do
 	echo "Starting blast for Sequence ${num}"
 	date
 	export num #exports num variable for later awk script
