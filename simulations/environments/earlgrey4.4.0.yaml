@@ -412,4 +412,3 @@ dependencies:
   - zlib-ng=2.2.1=he02047a_0
   - zstandard=0.23.0=py39h623c9ba_0
   - zstd=1.5.6=ha6fb4c9_0
-prefix: /hpc/group/yoderlab/hpk4/miniconda3/envs/earlgrey4.4.0
