@@ -1,0 +1,25 @@
+gff:
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/dros_pbmm2_check.RMV2.gff"
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/dros_minimap_check.RMV2.gff"
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/dros_illum_check.RMV2.gff"
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/dros_BWA_check.RMV2.gff"
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/dros_ref_onex.RMV2.gff"
+
+labels:
+- "PacBio, pbmm2 (0.36)"
+- "PacBio, minimap2 (0.37)"
+- "Illumina, BWA (0.45)"
+- "PacBio, BWA (0.68)"
+- "Reference X"
+
+colors:
+- "#009E73"
+- "#009E73"
+- "#F0E442"
+- "#009E73"
+- "#000000"
+
+coor:
+    start: 124104
+    step: 15000
+    repeat: 5

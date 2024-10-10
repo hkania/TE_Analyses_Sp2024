@@ -1,0 +1,22 @@
+gff:
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/Hg38/hg38_7_EDTA_V2.gff"
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/Hg38/hg38_7_RMV2.gff"
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/Hg38/hg38_7_EGV2.gff"
+- "~/Desktop/Graduate2024_25/Coding/Benchmarking/GFFs/Hg38/hg38_7_garlic_V2.gff"
+
+labels:
+- "EDTA (0.79)"
+- "RepeatModeler2 (0.92)"
+- "EarlGrey (1.00)"
+- "GARLIC (reference)"
+
+colors:
+- "#CC79A7"
+- "#D55E00"
+- "#0072B2"
+- "#000000"
+
+coor:
+    start: 1670000
+    step: 50000
+    repeat: 4
