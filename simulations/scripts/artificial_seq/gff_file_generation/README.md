@@ -1,10 +1,14 @@
 # GARLIC GFF File Generation
 The current version of GARLIC (v1.4 updated to mirror v1.5 with zero-based approach) does not generate GFF files describing where inserted repeats are
-within simulated repeat-rich sequences. 
+within simulated repeat-rich sequences. These scripts allow for such GFF files to be generated.
+
+Eventually, a generic snakemake workflow will be created so this is extendable to non-specific HPC linux systems.
 
 `gff_generation.sh` uses generic linux commands and ncbi_blast+ executables in a conda environment to parse through output error files (not actually
 errors, but where SLURM stores the output of running GARLIC's createModel.pl with perl) and returns a GFF-formatted file including the locations of all TEs
 including nested TEs.
+
+`model_success` houses scripts specifically used for the simulations generated for this project. They are specific to the HPC cluster at Duke University and nomenclature used for this project.
 
 ### **BEFORE RUNNING** 
 * If you generated more than one sequence in a GARLIC createFakeSequence.pl run, you MUST divide the output FASTA files (base sequences and
