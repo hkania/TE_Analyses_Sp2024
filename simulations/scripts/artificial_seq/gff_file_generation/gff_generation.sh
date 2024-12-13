@@ -42,7 +42,7 @@ LAST=$((${END}+1)) #total number of sequences generated
 #323 (gff file), 325 (int gff files), 327-328 (gff file), 332 (gff file), 334 (gff file), 357 (final_nest_file),
 #359-360 (insert splitting folder), 368 (insert splitting folder), 370 (miniconda activation), 382 (awk script location),
 #404 (nested awk script location), 407 (gff file location), 418 (gff file location), 422 (gff file location)
-#429-438 (insert splitting folder), 447-450 (gff file location)
+#429-438 (insert splitting folder), 448-451 (gff file location)
 #
 #
 #
@@ -441,6 +441,7 @@ for num in $(seq ${LAST} ${LAST}); do
 
 	rm -r ${align_dir} #remove the alignment directory
 	rm -r ${final_dir} #remove the final directory
+	rm -r ${int_dir} #remove the intermediate directory
 	echo "Alignment Files can be found in ${gzip_dir_2}"
 	date
 	echo "Cleaning up gff files, AT THE MOMENT KEEPING MOST INTERMEDIATE FILES DEC 2024"
